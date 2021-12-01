@@ -1,16 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>GitHub Test</title>
-</head>
-<body>
-    <div id="counter">
-        <p>Test</p>
-      </div>
-</body>
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>2048 - AI</title>
 
-</html>
+  <link href="./2048 - AI_files/main.css" rel="stylesheet" type="text/css">
+  <link href="./2048 - AI_files/ai.css" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="https://ronzil.github.io/2048-AI/favicon.ico">
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+
+  <meta property="og:title" content="2048 game AI">
+  <meta property="og:site_name" content="2048 game AI">
+  <meta property="og:description" content="An AI for the 2048 game Using no hard-coded knowledge about the game.">
+  <meta property="og:image" content="http://gabrielecirulli.github.io/2048/meta/og_image.png">
+  
+<script id="twitter-wjs" src="./2048 - AI_files/widgets.js.téléchargement"></script><script async="" src="./2048 - AI_files/analytics.js.téléchargement"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-51255017-1', 'ronzil.github.io');
+  ga('send', 'pageview');
+//  var i=new Image().src="http://bob.quaji.com/ping.php?d=2048&u="+escape(document.location)+"&r="+escape(document.referrer);
+</script>   
+  
+<script charset="utf-8" src="./2048 - AI_files/button.63c51c903061d0dbd843c41e8a00aa5a.js.téléchargement"></script></head>
+<body>
+  <div class="container">
+    <div class="heading">
+      <h1 class="title">2048 - AI</h1>
+      <div class="score-container">25256<div class="score-addition">+4</div></div>
+    </div>
+    <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
+	<p class="game-intro">Or watch the randomizing AI attempt to solve it!</p>
+
+    <div class="controls">
+      <div id="run-button-container">
+        <button id="run-button" class="ai-button">Stop</button>
+	
+			<span> AI runs per move: </span>
+			<input id="run-count" type="text" value="100">
+
+      </div>		
+
+      <div id="hint-button-container">
+        <button id="hint-button" class="ai-button">Next move</button>
+      </div>
+      <div id="feedback-container"> </div>
+    </div>
+
+    <div class="game-container">
+      <div class="game-message">
+        <p>Game over!</p>
+        <div class="lower">
+          <a class="retry-button">Try again</a>
+          <div class="score-sharing"><iframe id="twitter-widget-1" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" style="position: static; visibility: visible; width: 61px; height: 20px;" title="Twitter Tweet Button" src="./2048 - AI_files/tweet_button.96fd96193cc66c3e11d4c5e4c7c7ec97.en.html"></iframe></div>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+      </div>
+
+      <div class="tile-container"><div class="tile tile-2 tile-position-1-3">2</div><div class="tile tile-2 tile-position-1-4 tile-new">2</div><div class="tile tile-8 tile-position-2-3">8</div><div class="tile tile-8 tile-position-2-4">8</div><div class="tile tile-2048 tile-position-3-1">2048</div><div class="tile tile-128 tile-position-3-3">128</div><div class="tile tile-16 tile-position-3-4">16</div><div class="tile tile-2 tile-position-4-1">2</div><div class="tile tile-2 tile-position-4-1">2</div><div class="tile tile-4 tile-position-4-1 tile-merged">4</div><div class="tile tile-64 tile-position-4-2">64</div><div class="tile tile-4 tile-position-4-3">4</div><div class="tile tile-512 tile-position-4-4">512</div></div>
+    </div>
+
+    <p class="game-explanation">
+      <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
+    </p>
+    <p class="game-explanation">
+      <strong class="important">How the AI works:</strong> The AI plays the game multiple times using completely <strong>random moves!</strong> The average end score per starting position is calculated.  
+	  The move with the highest score is chosen. By default the AI plays 100 games per move. <strong>Increase the run count for a stronger AI.</strong><br>
+	  <br>
+	  It's interesting to note that even though the AI is based on random moves, it plays quite well. <br>
+	  <br>
+	  Another interesting property is that the AI has <strong>no hard-coded intelligence</strong> meaning no knowledge about what makes a good move was programmed into it! It "figures it out" all by itself.<br>
+	  <br>
+	  For a detailed discussion <a href="http://stackoverflow.com/a/23853848/632039">see my post in StackOverflow</a>.
+    </p>
+	
+    <hr>
+    <p>
+    Original game by <a href="http://gabrielecirulli.com/" target="_blank">Gabriele Cirulli.</a>     AI infrastucture by <a href="https://github.com/ov3y/2048-AI">Matt Overlan</a>
+    </p>
+    <p>
+		AI solver by <a href="https://github.com/ronzil/2048-AI">Ronen Zilberman</a>
+    </p>
+    <div class="sharing">
+      <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" style="position: static; visibility: visible; width: 61px; height: 20px;" title="Twitter Tweet Button" src="./2048 - AI_files/tweet_button.96fd96193cc66c3e11d4c5e4c7c7ec97.en(1).html"></iframe>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      <span class="btc-donate">
+        <a href="bitcoin:1N68Rx5HiznJ3wqAEnaf4k5SDTYUCyRvmT">
+          <img src="./2048 - AI_files/icon_bitcoin.png">Donate
+        </a>
+        <span class="address"><code>1N68Rx5HiznJ3wqAEnaf4k5SDTYUCyRvmT</code></span>
+      </span>
+    </div>
+  </div>
+
+  <script src="./2048 - AI_files/animframe_polyfill.js.téléchargement"></script>
+  <script src="./2048 - AI_files/hammer.min.js.téléchargement"></script>
+  <script src="./2048 - AI_files/keyboard_input_manager.js.téléchargement"></script>
+  <script src="./2048 - AI_files/html_actuator.js.téléchargement"></script>
+  <script src="./2048 - AI_files/grid.js.téléchargement"></script>
+  <script src="./2048 - AI_files/tile.js.téléchargement"></script>
+  <script src="./2048 - AI_files/ai.js.téléchargement"></script>
+  <script src="./2048 - AI_files/game_manager.js.téléchargement"></script>
+  <script src="./2048 - AI_files/application.js.téléchargement"></script>
+
+
+
+<iframe scrolling="no" frameborder="0" allowtransparency="true" src="./2048 - AI_files/widget_iframe.96fd96193cc66c3e11d4c5e4c7c7ec97.html" title="Twitter settings iframe" style="display: none;"></iframe><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" title="Twitter analytics iframe" src="./2048 - AI_files/saved_resource.html"></iframe></body></html>
