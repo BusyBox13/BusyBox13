@@ -1,20 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Test Mode Sombre Dynamic</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/test.css">
 </head>
 <body>
+    <a href="#" onclick="setLanguage('en')">English</a> 
+    <a href="#" onclick="setLanguage('es')">Spanish</a>
 
-	<div class="theme-switch-wrapper">
-		<label class="theme-switch" for="checkbox">
-			<input type="checkbox" id="checkbox">
-			<div class="slider round"></div>
-		</label>
-		<em>Switch Theme</em>
-	</div>
-
+<div id="div1"></div>
 </body>
-<script src="script.js"></script>
+<script>
+    var language; 
+    function getLanguage() {
+    (localStorage.getItem('language') == null) ? setLanguage('en') : false;
+    $.ajax({ 
+    url:  '/languages/' +  localStorage.getItem('language') + '.json', 
+    dataType: 'json', async: false, dataType: 'json', 
+    success: function (lang) { language = lang } });
+    }
+    
+    function setLanguage(lang) {
+    localStorage.setItem('language', lang);
+    }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+    $(document).ready(function(){
+        getLanguage();
+    $('#div1').text(language.save);
+    });
+
+    </script>
 </html>
